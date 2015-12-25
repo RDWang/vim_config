@@ -1,2 +1,2 @@
-# vim_config1
+# vim_config
 save local vim configuration file
