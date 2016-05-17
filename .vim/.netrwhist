@@ -1,6 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/root/.vim/bundle/project.vim'
 let g:netrw_dirhist_2='/home/lwang/.vim/bundle/cscope-quickfix'
 let g:netrw_dirhist_3='/home/lwang/public_html'
 let g:netrw_dirhist_4='/home/lwang/project/cpb/app-cpb-dts/ctlboard'
+let g:netrw_dirhist_5='/home/lwang/project/cpb/dts_xs/trunk'
+let g:netrw_dirhist_6='/home/lwang/.vim/bundle/a.vim'
+let g:netrw_dirhist_7='/home/lwang/.virt-manager'

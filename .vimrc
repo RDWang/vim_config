@@ -51,29 +51,18 @@ let Tlist_GainFocus_On_ToggleOpen=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Auto_Open=1
 
+"设置DirDiff忽略文件
+let g:DirDiffExcludes = "CVS,*.class,*.o,.git/,build/"
+
 "cscope设置
 nmap <C-_>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <F3>   :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-_>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+"nmap <C-_>e :cs find e <C-R>=expand("<cword>")<CR><CR>
 nmap <C-_>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-_>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-_>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
-" Using 'CTRL-spacebar' then a search type makes the vim window
-" split horizontally, with search result displayed in
-" the new window.
-
-"nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-"nmap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-"nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 set nocp
@@ -84,6 +73,8 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
+"Bundle "multvals.vim"
+"Bundle "genutils"
 "Bundle "linuxmag.vim"
 "Bundle "project.vim"
 Bundle "project.tar.gz"
@@ -102,7 +93,13 @@ Bundle "CCTree"
 Bundle "CRefVim"
 Bundle "c.vim"
 "Bundle "FastGrep"
-Bundle "EasyGrep"
+"Bundle "EasyGrep"
+"Bundle "greputils"
+"Bundle "notes.vim"
+"Bundle "Notes"
+"Bundle "genutils"
+Bundle "VimFootnotes"
+"Bundle "VimNotes"
 Bundle "winmanager"
 "Bundle "Doxygen-via-Doxygen"
 Bundle "doxygen-support.vim"
@@ -138,14 +135,16 @@ Bundle "neocomplcache-snippets_complete"
 Bundle "vimwiki"
     let g:vimwiki_use_mouse=1
     let g:vimwiki_use_calendar=1
-    let vimwiki_path=$HOME.'/vimwiki'
-    let vimwiki_html_path=$HOME.'/vimwiki_html'
+    let vimwiki_path=$HOME.'/wiki/vimwiki'
+    let vimwiki_html_path=$HOME.'/wiki/vimwiki_html'
     let g:vimwiki_list =[{'path':vimwiki_path,
                         \ 'path_html':vimwiki_html_path,
                         \ 'template_path':vimwiki_html_path.'assets',
                         \ 'template_default':'default',
                         \ 'template_ext': '.tpl',
-                        \ 'auto_export': 0}]
+                        \ 'auto_export': 0},
+                        \{'path':$HOME.'/wiki/mywiki',
+                        \ 'path_html':$HOME.'/wiki/mywiki_html'}]
     "设置calendar相关
     let g:calendar_focus_today = 1
 
@@ -183,9 +182,36 @@ Bundle 'The-NERD-Commenter'
   map <c-h> ,c<space>
 "Bundle 'youdao.dict'
 "Bundle "Dictionary"
+Bundle 'autopreview'
+    let g:AutoPreview_enabled=1
+    let g:AutoPreview_allowed_filetypes=["c","cpp","java"]
+    set updatetime=50 
 
 "定义使用快捷键
-nnoremap <silent> <F2> :TlistToggle<CR>
+"nnoremap <silent> <F2> :TlistToggle<CR>
+"nnoremap <F5> :AutoPreviewToggle<CR>
+
+function GetInputChar()
+    n=inputdialog("Input search string:")
+    return n
+endfunction
+
+"自己定义常用的快捷键，使用（;）作为前导符
+nnoremap ;a :AutoPreviewToggle<CR>
+nnoremap ;c :close<CR>
+nmap ;fe :cs find e <C-R>=expand("<cword>")<CR><CR> 
+nmap ;fc :cs find c <C-R>=expand("<cword>")<CR><CR>
+"nnoremap ;f :grep -r -n  GetInputChar() ./<CR> 
+nnoremap ;fmt gg=G
+nnoremap ;b <C-b>
+nnoremap ;d <C-F>
+nnoremap ;q :qa<CR>
+nnoremap <buffer> ;s :w<CR>
+nnoremap <silent> ;t :TlistToggle<CR>
+nnoremap ;wl <C-W>w
+nnoremap ;wj <C-W>j
+nnoremap ;wh <C-W>h
+nnoremap ;wk <C-W>k
 
 "放置在Bundle的设置后，防止意外BUG
 filetype plugin indent on
