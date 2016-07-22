@@ -187,6 +187,16 @@ Bundle 'autopreview'
     let g:AutoPreview_allowed_filetypes=["c","cpp","java"]
     set updatetime=50 
 
+"定义python使用的相关插件
+Bundle "pydoc.vim"
+Bundle "Pydiction"
+    let g:pydiction_location = '/home/lwang/.vim/bundle/Pydiction/complete-dict'
+    let g:Pydiction_menu_height = 3
+Bundle "python.vim"
+Bundle "completeWord.py"
+Bundle "pythonhelper"
+
+
 "定义使用快捷键
 "nnoremap <silent> <F2> :TlistToggle<CR>
 "nnoremap <F5> :AutoPreviewToggle<CR>
